@@ -9,7 +9,7 @@ profile:
         - type: telegram
           username: advaita
         - type: phone
-          number: +380662183886
+          number: '+380662183886'
         - type: email
           address: mark.harnyk@gmail.com
 
