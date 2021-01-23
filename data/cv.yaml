@@ -1,0 +1,139 @@
+profile:
+    name: Mark Harnyk
+    nameLocal: Марк Гарник
+    contacts:
+        - type: linkedin
+          username: wubba-lubba-dub-dub
+        - type: github
+          username: corporateanon
+        - type: telegram
+          username: advaita
+        - type: phone
+          number: +380662183886
+        - type: email
+          address: mark.harnyk@gmail.com
+
+history:
+    - company:
+          name: Bizzabo
+          url: https://bizzabo.com
+      title: Lead Software Engineer
+      start: 2016
+      end: 2020
+      text: |
+          **Responsibility:**
+
+            - developing user interfaces
+            - developing system-wide features like authentication, routing, whitelabel domains support, data caching and synchronization
+            - developing tools for QA testing, CI integration
+            - mentoring, cross-team consulting, implementation of best practices
+            - technical interviewing
+
+          **Technologies:**
+
+            - node, react/redux/saga, nextjs, react-native, circleci, nightwatch, plantuml, lerna, redis, docker, kubernetes, helm
+
+          **Achievements:**
+
+            - created multiple web interfaces for the main product
+            - developed multi-domain router for hosting web-applications customers’ web-applications
+            - created the authentication portal
+            - helped to bootstrap multiple new services for other teams written in nextjs
+            - created multiple utilities simplifying developer workflow with QA environment
+            - created UI libraries, API clients etc
+            - created libraries for local development of nodejs applications running in kubernetes cluster
+            - configured fully automated workflow for releasing lerna-based npm packages
+            - integrated eslint for multiple projects with legacy codebase
+            - integrated multiple payment systems including spreedly, stripe and stripe bitcoin
+
+    #----------------------
+
+    - company:
+          name: DMVDesk
+          url: https://dmvdesk.com
+      title: Senior Frontend Developer
+      start: 2015
+      end: 2016
+      text: |
+          **Responsibility:**
+            - user interface development
+
+          **Technologies:**
+            - angular v1
+
+    # #----------------------
+
+    - company:
+          name: Plarium
+          url: https://plarium.com
+      title: Senior Frontend Developer
+      start: 2013
+      end: 2015
+      text: |
+          **Responsibility:**
+
+            - in-house analytics solution frontend development and architecture
+
+          **Technologies:**
+
+            - angular v1
+            - webpack
+            - ES6
+
+          **Achievements:**
+
+            - created a full development cycle of the new analytics dashboard. Converted old “asp.net + jquery” solution to a single-page application created with angular. Introduced git instead of svn.
+
+    # #----------------------
+
+    - company:
+          name: TOA Technologies (now part of Oracle)
+      title: Senior Frontend Developer
+      start: 2011
+      end: 2013
+      text: |
+          **Responsibility:**
+
+            - developing user interfaces
+            - creating tools for integration testing of geolocation system
+            - refactoring of the existing codebase
+
+          **Technologies:**
+
+            - php, plain javascript, google maps, d3
+
+    # #----------------------
+
+    - company:
+          name: <Meta>
+          ur: https://meta.ua
+      title: Middle Frontend Developer
+      start: 2010
+      end: 2011
+      text: |
+          Responsibility:
+            - developing webmail application (db + backend + frontend)
+
+          **Technologies:**
+            - perl, vanillajs
+
+          **Achievements:**
+            - learned the main principles of frontend development, middle load database optimizations
+            - experimented with offline data synchronization and queue managers
+
+    #----------------------
+
+    - company:
+          name: Tsentralnaya, LLC
+      title: Lead IT Engineer
+      start: 2006
+      end: 2010
+      text: |
+          **Responsibility:**
+            - system administration
+            - ERP applications integration
+            - simple automation
+            - developing company website
+
+          **Technologies:**
+            - php, 1C, javascript, c++, linux, virtualbox, windows 2003 server
