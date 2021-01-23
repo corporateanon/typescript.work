@@ -25,5 +25,5 @@ const useStyles = createUseStyles<Theme>((theme) => ({
 
 export const ContentPage: FC = ({ children }) => {
     const classes = useStyles();
-    return <main className={classes.root}>{children}</main>;
+    return <main className={`clearfix ${classes.root}`}>{children}</main>;
 };

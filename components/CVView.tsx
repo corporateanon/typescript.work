@@ -37,12 +37,18 @@ const useStyles = createUseStyles<Theme>(() => ({
 
 interface CVViewProps {
     data: CVData;
+    revealSecrets: boolean;
+    onSignIn: () => void;
 }
-export const CVView: FC<CVViewProps> = ({ data }) => {
+export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
     const classes = useStyles();
     return (
         <>
-            <ProfileView data={data.profile} />
+            <ProfileView
+                data={data.profile}
+                revealSecrets={revealSecrets}
+                onSignIn={onSignIn}
+            />
             <article className={classes.root}>
                 {data.history.map((item, i) => {
                     return (

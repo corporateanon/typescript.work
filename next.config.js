@@ -5,6 +5,6 @@ const withMDX = require('@next/mdx')({
 });
 module.exports = withYaml(
     withMDX({
-        pageExtensions: ['js', 'jsx', 'mdx', 'tsx'],
+        pageExtensions: ['js', 'jsx', 'mdx', 'tsx', 'ts'],
     })
 );

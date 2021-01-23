@@ -1,97 +1,51 @@
 import { FC } from 'react';
-import {
-    ContactIcon,
-    ContactLink,
-    CVContactItem,
-    CVProfile,
-} from '../models/CV';
-import { exhaustiveCheck } from 'ts-exhaustive-check';
-import { Email, Github, Globe, Linkedin, Phone, Telegram } from './Icons';
+import { createUseStyles } from 'react-jss';
+import { CVProfile } from '../models/CV';
+import { ContactLinkView } from './ContactLinkView';
+import { Theme } from './theme';
 
-const contactItemToLink = (item: CVContactItem): ContactLink => {
-    const link: ContactLink = {
-        name: '',
-        type: 'link',
-        url: '',
-        icon: 'url',
-    };
-
-    switch (item.type) {
-        case 'email':
-            link.url = `mailto:${item.address}`;
-            link.name = item.address;
-            link.icon = 'email';
-            break;
-        case 'github':
-            link.url = `https://github.com/${item.username}`;
-            link.name = item.username;
-            link.icon = 'github';
-            break;
-        case 'link':
-            link.url = item.url;
-            link.name = item.name;
-            break;
-        case 'linkedin':
-            link.url = `https://linkedin.com/in/${item.username}`;
-            link.name = item.username;
-            link.icon = 'linkedin';
-            break;
-        case 'phone':
-            link.url = `tel:${item.number}`;
-            link.name = item.number;
-            link.icon = 'phone';
-            break;
-        case 'telegram':
-            link.url = `https://t.me/${item.username}`;
-            link.name = `@${item.username}`;
-            link.icon = 'telegram';
-            break;
-
-        default:
-            return exhaustiveCheck(item);
-    }
-
-    return link;
-};
-
-const LinkIcon: FC<{ icon: ContactIcon }> = ({ icon }) => {
-    const iconMap: { [k in ContactIcon]: any } = {
-        email: Email,
-        github: Github,
-        linkedin: Linkedin,
-        phone: Phone,
-        telegram: Telegram,
-        url: Globe,
-    };
-    const IconComponent = iconMap[icon] ?? Globe;
-    return <IconComponent />;
-};
-
-const ContactLinkView: FC<{ data: CVContactItem }> = ({ data }) => {
-    const link = contactItemToLink(data);
-    return (
-        <a target="_blank" href={link.url} rel="noopener noreferrer nofollow">
-            <LinkIcon icon={link.icon} /> {link.name}
-        </a>
-    );
-};
+const useStyles = createUseStyles<Theme>((theme) => ({
+    pseudoLink: {
+        cursor: 'pointer',
+    },
+}));
 
 interface ProfileViewProps {
     data: CVProfile;
+    revealSecrets: boolean;
+    onSignIn: () => void;
 }
 
-export const ProfileView: FC<ProfileViewProps> = ({ data }) => {
+export const ProfileView: FC<ProfileViewProps> = ({
+    data,
+    revealSecrets,
+    onSignIn,
+}) => {
+    const classes = useStyles();
     return (
         <article>
-            <h4>{data.name}</h4>
+            {revealSecrets ? (
+                <h4>{data.name}</h4>
+            ) : (
+                <>
+                    <h4>
+                        Developer Name{' '}
+                        <a onClick={onSignIn} className={classes.pseudoLink}>
+                            Sign in to view details
+                        </a>
+                    </h4>
+                </>
+            )}
             <div>
-                <ul>
-                    {data.contacts?.map((contactItem, i) => (
-                        <li>
-                            <ContactLinkView data={contactItem} key={i} />
-                        </li>
-                    ))}
-                </ul>
+                {revealSecrets ? (
+                    <ul>
+                        {data.contacts?.map((contactItem, i) => (
+                            <li>
+                                <ContactLinkView data={contactItem} key={i} />
+                            </li>
+                        ))}
+                    </ul>
+                ) : null}
             </div>
         </article>
     );
