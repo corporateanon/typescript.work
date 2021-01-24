@@ -3,12 +3,13 @@ import { createUseStyles } from 'react-jss';
 import { Theme } from './theme';
 
 const WIDTH = 900;
+const VERTICAL_MARGIN_REM = 2;
 const useStyles = createUseStyles<Theme>((theme) => ({
     root: {
         color: theme.colorText,
         fontSize: 14,
-        marginBottom: '2rem',
-        marginTop: '2rem',
+        marginBottom: `${VERTICAL_MARGIN_REM}rem`,
+        marginTop: `${VERTICAL_MARGIN_REM}rem`,
         width: '100%',
         maxWidth: WIDTH,
         marginLeft: 'auto',
@@ -19,11 +20,19 @@ const useStyles = createUseStyles<Theme>((theme) => ({
             boxShadow: 'none',
         },
         backgroundColor: theme.colorPaper,
+        minHeight: `calc(100vh - ${VERTICAL_MARGIN_REM * 2}rem)`,
+    },
+    bordered: {
         boxShadow: `0px 0px 5px 2px ${theme.colorShadow}`,
     },
 }));
 
-export const ContentPage: FC = ({ children }) => {
+export const ContentPage: FC<{
+    bordered?: boolean;
+}> = ({ children, bordered }) => {
     const classes = useStyles();
-    return <main className={`clearfix ${classes.root}`}>{children}</main>;
+    const className = `clearfix ${classes.root} ${
+        bordered ? classes.bordered : ''
+    }`;
+    return <main className={className}>{children}</main>;
 };

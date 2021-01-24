@@ -26,7 +26,7 @@ const Page: FC = () => {
     return (
         <>
             {authLine}
-            <ContentPage>
+            <ContentPage bordered>
                 <CVView
                     data={data}
                     onSignIn={doSignIn}
