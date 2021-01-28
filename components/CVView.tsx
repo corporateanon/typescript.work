@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 import { GetCV } from '../queries/__generated__/GetCV';
+import { Period } from './Period';
 import { ProfileView } from './ProfileView';
 import { StringList } from './StringList';
 import { theme, Theme } from './theme';
@@ -20,17 +21,6 @@ const useStyles = createUseStyles<Theme>(() => ({
             listStyle: 'square inside',
             marginLeft: '2rem',
         },
-    },
-    period: {
-        border: '1px solid #aaa',
-        paddingLeft: '1rem',
-        paddingRight: '1rem',
-        borderRadius: 4,
-        fontSize: '1.3rem',
-        marginRight: '1rem',
-        marginLeft: '1rem',
-        verticalAlign: 'middle',
-        whiteSpace: 'nowrap',
     },
 }));
 
@@ -77,9 +67,7 @@ export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
                                         </strong>
                                     </>
                                 ) : null}
-                                <span className={classes.period}>
-                                    {item.start} — {item.end}
-                                </span>
+                                <Period start={item.start} end={item.end} />
                             </h4>
 
                             <StringList
