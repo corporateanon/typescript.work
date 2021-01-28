@@ -1,8 +1,45 @@
 import { FC } from 'react';
 import { createUseStyles } from 'react-jss';
-import { CVProfile } from '../models/CV';
+import {
+    ContactEmail,
+    ContactGithub,
+    ContactLinkedin,
+    ContactPhone,
+    ContactSkype,
+    ContactTelegram,
+    CVContactItem,
+} from '../models/CV';
+import { GetCV_cvCollection_items_profile } from '../queries/__generated__/GetCV';
 import { ContactLinkView } from './ContactLinkView';
 import { Theme } from './theme';
+
+const profileToContactsList = (
+    profile: GetCV_cvCollection_items_profile
+): CVContactItem[] => {
+    return [
+        ...(profile.email?.map(
+            (address): ContactEmail => ({ type: 'email', address })
+        ) ?? []),
+        ...(profile.phone?.map(
+            (number): ContactPhone => ({ type: 'phone', number })
+        ) ?? []),
+        ...(profile.telegram?.map(
+            (username): ContactTelegram => ({ type: 'telegram', username })
+        ) ?? []),
+        ...(profile.skype?.map(
+            (username): ContactSkype => ({ type: 'skype', username })
+        ) ?? []),
+        ...(profile.gitHub?.map(
+            (username): ContactGithub => ({ type: 'github', username })
+        ) ?? []),
+        profile?.linkedIn
+            ? ({
+                  type: 'linkedin',
+                  username: profile.linkedIn,
+              } as ContactLinkedin)
+            : null,
+    ].filter((_) => _);
+};
 
 const useStyles = createUseStyles<Theme>((theme) => ({
     pseudoLink: {
@@ -11,7 +48,7 @@ const useStyles = createUseStyles<Theme>((theme) => ({
 }));
 
 interface ProfileViewProps {
-    data: CVProfile;
+    data: GetCV_cvCollection_items_profile;
     revealSecrets: boolean;
     onSignIn: () => void;
 }
@@ -22,6 +59,9 @@ export const ProfileView: FC<ProfileViewProps> = ({
     onSignIn,
 }) => {
     const classes = useStyles();
+
+    const contacts = profileToContactsList(data);
+
     return (
         <article>
             {revealSecrets ? (
@@ -29,18 +69,24 @@ export const ProfileView: FC<ProfileViewProps> = ({
             ) : (
                 <>
                     <h4>
-                        Developer Name{' '}
-                        <a onClick={onSignIn} className={classes.pseudoLink}>
-                            Sign in to view details
-                        </a>
+                        <button
+                            onClick={onSignIn}
+                            className={classes.pseudoLink}
+                        >
+                            Contact Me!
+                        </button>
                     </h4>
+                    <p>
+                        Contact information is only available after you sign up.
+                        It's free and takes just a few moments!
+                    </p>
                 </>
             )}
             <div>
                 {revealSecrets ? (
                     <ul>
-                        {data.contacts?.map((contactItem, i) => (
-                            <li>
+                        {contacts.map((contactItem, i) => (
+                            <li key={i}>
                                 <ContactLinkView data={contactItem} key={i} />
                             </li>
                         ))}

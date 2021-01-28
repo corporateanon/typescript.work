@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { exhaustiveCheck } from 'ts-exhaustive-check';
-import { ContactLink, CVContactItem } from '../models/CV';
+import { ContactLink, CVContactItem } from '../models/Contact';
 import { LinkIcon } from './LinkIcon';
 
 const contactItemToLink = (item: CVContactItem): ContactLink => {
@@ -40,6 +40,11 @@ const contactItemToLink = (item: CVContactItem): ContactLink => {
             link.url = `https://t.me/${item.username}`;
             link.name = `@${item.username}`;
             link.icon = 'telegram';
+            break;
+        case 'skype':
+            link.url = `skype:${item.username}`;
+            link.name = `${item.username}`;
+            link.icon = 'skype';
             break;
 
         default:

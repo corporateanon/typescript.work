@@ -18,6 +18,10 @@ export interface ContactEmail {
     type: 'email';
     address: string;
 }
+export interface ContactSkype {
+    type: 'skype';
+    username: string;
+}
 
 export type ContactIcon =
     | 'email'
@@ -25,7 +29,8 @@ export type ContactIcon =
     | 'url'
     | 'linkedin'
     | 'phone'
-    | 'telegram';
+    | 'telegram'
+    | 'skype';
 
 export interface ContactLink {
     type: 'link';
@@ -42,26 +47,5 @@ export type CVContactItem =
     | ContactLink
     | ContactLinkedin
     | ContactPhone
-    | ContactTelegram;
-
-export interface CVProfile {
-    name: string;
-    nameLocal?: string;
-    contacts?: CVContactItem[];
-}
-
-export interface CVHistoryItem {
-    start?: string;
-    end?: string;
-    title?: string;
-    company?: {
-        name: string;
-        url?: string;
-    };
-    text?: string;
-}
-
-export interface CVData {
-    profile: CVProfile;
-    history: CVHistoryItem[];
-}
+    | ContactTelegram
+    | ContactSkype;

@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
-import { CVData } from '../models/CV';
-import ReactMarkdown from 'react-markdown';
-import gfm from 'remark-gfm';
 import { createUseStyles } from 'react-jss';
-import { theme, Theme } from './theme';
+import { GetCV } from '../queries/__generated__/GetCV';
 import { ProfileView } from './ProfileView';
+import { StringList } from './StringList';
+import { theme, Theme } from './theme';
 
 const useStyles = createUseStyles<Theme>(() => ({
     root: {},
@@ -36,39 +35,44 @@ const useStyles = createUseStyles<Theme>(() => ({
 }));
 
 interface CVViewProps {
-    data: CVData;
+    data: GetCV;
     revealSecrets: boolean;
     onSignIn: () => void;
 }
 export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
     const classes = useStyles();
+
+    const cvItem = data?.cvCollection?.items[0];
+
     return (
         <>
-            <ProfileView
-                data={data.profile}
-                revealSecrets={revealSecrets}
-                onSignIn={onSignIn}
-            />
+            {cvItem?.profile && (
+                <ProfileView
+                    data={cvItem?.profile}
+                    revealSecrets={revealSecrets}
+                    onSignIn={onSignIn}
+                />
+            )}
             <article className={classes.root}>
-                {data.history.map((item, i) => {
+                {cvItem?.historyCollection?.items?.map((item, i) => {
                     return (
                         <div key={i}>
                             <h4>
                                 <span>{item.title}</span>
-                                {item.company ? (
+                                {item.companyName ? (
                                     <>
                                         {' '}
                                         /{' '}
                                         <strong className={classes.company}>
-                                            {item.company.url ? (
+                                            {item.companyUrl ? (
                                                 <a
                                                     target="_blank"
-                                                    href={item.company.url}
+                                                    href={item.companyUrl}
                                                 >
-                                                    {item.company.name}
+                                                    {item.companyName}
                                                 </a>
                                             ) : (
-                                                item.company.name
+                                                item.companyName
                                             )}
                                         </strong>
                                     </>
@@ -77,13 +81,22 @@ export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
                                     {item.start} — {item.end}
                                 </span>
                             </h4>
-                            {item.text ? (
-                                <div className={classes.text}>
-                                    <ReactMarkdown plugins={[gfm]}>
-                                        {item.text}
-                                    </ReactMarkdown>
-                                </div>
-                            ) : null}
+
+                            <StringList
+                                items={item.responsibility}
+                                className={classes.text}
+                                title="Responsibilities"
+                            />
+                            <StringList
+                                items={item.technologies}
+                                className={classes.text}
+                                title="Technologies"
+                            />
+                            <StringList
+                                items={item.achievements}
+                                className={classes.text}
+                                title="Achievements"
+                            />
                         </div>
                     );
                 })}

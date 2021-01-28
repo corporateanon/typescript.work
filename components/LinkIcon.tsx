@@ -1,6 +1,14 @@
 import { FC } from 'react';
-import { ContactIcon } from '../models/CV';
-import { Email, Github, Globe, Linkedin, Phone, Telegram } from './Icons';
+import { ContactIcon } from '../models/Contact';
+import {
+    Email,
+    Github,
+    Globe,
+    Linkedin,
+    Phone,
+    Skype,
+    Telegram,
+} from './Icons';
 
 export const LinkIcon: FC<{ icon: ContactIcon }> = ({ icon }) => {
     const iconMap: { [k in ContactIcon]: any } = {
@@ -10,6 +18,7 @@ export const LinkIcon: FC<{ icon: ContactIcon }> = ({ icon }) => {
         phone: Phone,
         telegram: Telegram,
         url: Globe,
+        skype: Skype,
     };
     const IconComponent = iconMap[icon] ?? Globe;
     return <IconComponent />;
