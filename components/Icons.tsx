@@ -5,4 +5,6 @@ export {
     FaEnvelope as Email,
     FaMobile as Phone,
     FaGlobeAmericas as Globe,
+    FaSkype as Skype,
+    FaUser as Person,
 } from 'react-icons/fa';

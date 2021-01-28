@@ -1,7 +1,10 @@
+import classes from '*.module.css';
 import { FC } from 'react';
+import { createUseStyles } from 'react-jss';
 import { exhaustiveCheck } from 'ts-exhaustive-check';
-import { ContactLink, CVContactItem } from '../models/CV';
+import { ContactLink, CVContactItem } from '../models/Contact';
 import { LinkIcon } from './LinkIcon';
+import { Theme } from './theme';
 
 const contactItemToLink = (item: CVContactItem): ContactLink => {
     const link: ContactLink = {
@@ -41,6 +44,11 @@ const contactItemToLink = (item: CVContactItem): ContactLink => {
             link.name = `@${item.username}`;
             link.icon = 'telegram';
             break;
+        case 'skype':
+            link.url = `skype:${item.username}`;
+            link.name = `${item.username}`;
+            link.icon = 'skype';
+            break;
 
         default:
             return exhaustiveCheck(item);
@@ -49,11 +57,19 @@ const contactItemToLink = (item: CVContactItem): ContactLink => {
     return link;
 };
 
+const useStyles = createUseStyles<Theme>((theme) => ({
+    name: {
+        marginLeft: '1rem',
+    },
+}));
+
 export const ContactLinkView: FC<{ data: CVContactItem }> = ({ data }) => {
     const link = contactItemToLink(data);
+    const classes = useStyles();
     return (
         <a target="_blank" href={link.url} rel="noopener noreferrer nofollow">
-            <LinkIcon icon={link.icon} /> {link.name}
+            <LinkIcon icon={link.icon} />
+            <span className={classes.name}>{link.name}</span>
         </a>
     );
 };

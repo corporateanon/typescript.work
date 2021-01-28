@@ -1,8 +1,8 @@
+import { signIn, signOut, useSession } from 'next-auth/client';
 import { FC, useCallback } from 'react';
 import { ContentPage } from '../components/ContentPage';
 import { CVView } from '../components/CVView';
-import data from '../data/cv.yaml';
-import { signIn, signOut, useSession } from 'next-auth/client';
+import { useCV } from '../queries/useCV';
 
 const Page: FC = () => {
     const [session, loading] = useSession();
@@ -22,6 +22,8 @@ const Page: FC = () => {
     const doSignIn = useCallback(() => {
         signIn('auth0');
     }, []);
+
+    const { data, error } = useCV();
 
     return (
         <>

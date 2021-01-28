@@ -1,0 +1,31 @@
+query GetCV {
+    cvCollection {
+        items {
+            profile {
+                name
+                nativeName
+                linkedIn
+                email
+                phone
+                skype
+                telegram
+                gitHub
+            }
+            historyCollection {
+                items {
+                    companyName
+                    companyUrl
+                    title
+                    description {
+                        json
+                    }
+                    start
+                    end
+                    responsibility
+                    technologies
+                    achievements
+                }
+            }
+        }
+    }
+}
