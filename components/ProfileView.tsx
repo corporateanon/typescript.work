@@ -11,6 +11,7 @@ import {
 } from '../models/Contact';
 import { GetCV_cvCollection_items_profile } from '../queries/__generated__/GetCV';
 import { ContactLinkView } from './ContactLinkView';
+import { Person } from './Icons';
 import { Theme } from './theme';
 
 const profileToContactsList = (
@@ -42,8 +43,26 @@ const profileToContactsList = (
 };
 
 const useStyles = createUseStyles<Theme>((theme) => ({
+    root: {
+        backgroundColor: '#eeeeee',
+        padding: '1rem',
+        marginBottom: '2rem',
+        textAlign: 'center',
+    },
     pseudoLink: {
         cursor: 'pointer',
+    },
+    noMarginBottom: {
+        marginBottom: 0,
+    },
+    list: {
+        textAlign: 'left',
+        maxWidth: 200,
+        display: 'inline-block',
+    },
+    listItem: {
+        listStyle: 'none',
+        marginLeft: '1.2rem',
     },
 }));
 
@@ -63,9 +82,11 @@ export const ProfileView: FC<ProfileViewProps> = ({
     const contacts = profileToContactsList(data);
 
     return (
-        <article>
+        <article className={classes.root}>
             {revealSecrets ? (
-                <h4>{data.name}</h4>
+                <h1>
+                    <Person /> {data.name}
+                </h1>
             ) : (
                 <>
                     <h4>
@@ -76,17 +97,17 @@ export const ProfileView: FC<ProfileViewProps> = ({
                             Contact Me!
                         </button>
                     </h4>
-                    <p>
+                    <p className={classes.noMarginBottom}>
                         Contact information is only available after you sign up.
                         It's free and takes just a few moments!
                     </p>
                 </>
             )}
             <div>
-                {revealSecrets ? (
-                    <ul>
+                {revealSecrets && contacts?.length ? (
+                    <ul className={`${classes.list} ${classes.noMarginBottom}`}>
                         {contacts.map((contactItem, i) => (
-                            <li key={i}>
+                            <li key={i} className={classes.listItem}>
                                 <ContactLinkView data={contactItem} key={i} />
                             </li>
                         ))}

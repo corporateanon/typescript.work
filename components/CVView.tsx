@@ -1,28 +1,32 @@
 import React, { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 import { GetCV } from '../queries/__generated__/GetCV';
+import { Divider } from './Divider';
 import { Period } from './Period';
 import { ProfileView } from './ProfileView';
 import { StringList } from './StringList';
 import { theme, Theme } from './theme';
+import NoSSR from '@mpth/react-no-ssr';
 
-const useStyles = createUseStyles<Theme>(() => ({
-    root: {},
-    company: {
-        color: theme.colorPrimary,
-        '& a, & a:hover, & a:visited, & a:active': {
+const useStyles = createUseStyles<Theme>(
+    {
+        company: {
             color: theme.colorPrimary,
-            borderBottom: `1px dashed ${theme.colorPrimary}`,
+            '& a, & a:hover, & a:visited, & a:active': {
+                color: theme.colorPrimary,
+                borderBottom: `1px dashed ${theme.colorPrimary}`,
+            },
+        },
+        text: {
+            '& ul': {},
+            '& li': {
+                listStyle: 'square inside',
+                marginLeft: '2rem',
+            },
         },
     },
-    text: {
-        '& ul': {},
-        '& li': {
-            listStyle: 'square inside',
-            marginLeft: '2rem',
-        },
-    },
-}));
+    { name: 'CVView' }
+);
 
 interface CVViewProps {
     data: GetCV;
@@ -36,17 +40,22 @@ export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
 
     return (
         <>
-            {cvItem?.profile && (
-                <ProfileView
-                    data={cvItem?.profile}
-                    revealSecrets={revealSecrets}
-                    onSignIn={onSignIn}
-                />
-            )}
-            <article className={classes.root}>
+            <NoSSR fallback={<article />}>
+                <>
+                    {cvItem?.profile && (
+                        <ProfileView
+                            data={cvItem?.profile}
+                            revealSecrets={revealSecrets}
+                            onSignIn={onSignIn}
+                        />
+                    )}
+                </>
+            </NoSSR>
+            <article role="asd">
                 {cvItem?.historyCollection?.items?.map((item, i) => {
                     return (
                         <div key={i}>
+                            {!!i && <Divider />}
                             <h4>
                                 <span>{item.title}</span>
                                 {item.companyName ? (
