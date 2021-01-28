@@ -8,7 +8,7 @@ import {
     ContactSkype,
     ContactTelegram,
     CVContactItem,
-} from '../models/CV';
+} from '../models/Contact';
 import { GetCV_cvCollection_items_profile } from '../queries/__generated__/GetCV';
 import { ContactLinkView } from './ContactLinkView';
 import { Theme } from './theme';
