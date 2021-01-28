@@ -8,18 +8,22 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.7",
     "@mdx-js/loader": "^1.5.1",
     "@mdx-js/react": "^1.6.18",
     "@next/mdx": "^9.1.1",
+    "graphql": "^15.5.0",
     "milligram": "^1.4.1",
     "next": "latest",
     "next-auth": "^3.1.0",
+    "next-graphql-loader": "^1.0.1",
     "normalize.css": "^8.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-icons": "^4.1.0",
     "react-jss": "^10.5.0",
     "react-markdown": "^5.0.3",
+    "recompose": "^0.30.0",
     "remark-gfm": "^1.0.0",
     "ts-exhaustive-check": "^1.0.0"
   },
