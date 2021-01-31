@@ -10,6 +10,22 @@ import NoSSR from '@mpth/react-no-ssr';
 
 const useStyles = createUseStyles<Theme>(
     {
+        root: {
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+        },
+        left: {
+            maxWidth: 260,
+            flex: 1,
+        },
+        right: {
+            flex: 2,
+            maxWidth: 645,
+            minWidth: 300,
+            // marginLeft: '2rem',
+        },
+
         company: {
             color: theme.colorPrimary,
             '& a, & a:hover, & a:visited, & a:active': {
@@ -39,9 +55,9 @@ export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
     const cvItem = data?.cvCollection?.items[0];
 
     return (
-        <>
-            <NoSSR fallback={<article />}>
-                <>
+        <div className={classes.root}>
+            <aside className={classes.left}>
+                <NoSSR>
                     {cvItem?.profile && (
                         <ProfileView
                             data={cvItem?.profile}
@@ -49,9 +65,9 @@ export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
                             onSignIn={onSignIn}
                         />
                     )}
-                </>
-            </NoSSR>
-            <article role="asd">
+                </NoSSR>
+            </aside>
+            <article className={classes.right}>
                 {cvItem?.historyCollection?.items?.map((item, i) => {
                     return (
                         <div key={i}>
@@ -98,6 +114,6 @@ export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
                     );
                 })}
             </article>
-        </>
+        </div>
     );
 };

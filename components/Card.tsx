@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 import { Theme } from './theme';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const useStyles = createUseStyles<Theme>((theme) => ({
     root: {
@@ -62,9 +63,9 @@ export const Card: FC<{
     return (
         <div className={classes.root}>
             {href ? (
-                <a className={classes.globalLink} href={href}>
-                    {content}
-                </a>
+                <Link href={href}>
+                    <a className={classes.globalLink}>{content}</a>
+                </Link>
             ) : (
                 content
             )}

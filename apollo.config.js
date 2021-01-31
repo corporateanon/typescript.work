@@ -4,7 +4,7 @@ de.config({ path: '.env.local' });
 module.exports = {
     client: {
         includes: [
-            './{pages,lib,components,models,queries}/**/*.{ts,tsx,graphql}',
+            './{pages,lib,components,models,queries,utils}/**/*.{ts,tsx,graphql}',
         ],
         service: {
             name: 'contentful',

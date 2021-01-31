@@ -3,6 +3,8 @@ import { FC, useCallback } from 'react';
 import { ContentPage } from '../components/ContentPage';
 import { CVView } from '../components/CVView';
 import { useCV } from '../queries/useCV';
+import { getDataFromTree } from '@apollo/react-ssr';
+import { withApolloClient } from '../utils/withApollo';
 
 const Page: FC = () => {
     const [session, loading] = useSession();
@@ -38,4 +40,4 @@ const Page: FC = () => {
         </>
     );
 };
-export default Page;
+export default withApolloClient(Page, { getDataFromTree });
