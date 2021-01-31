@@ -1,4 +1,3 @@
-import { fromPromise } from '@apollo/client';
 import React, { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 import { GetCV } from '../queries/__generated__/GetCV';
