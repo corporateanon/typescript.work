@@ -1,6 +1,6 @@
 {
     "name": "with-mdx",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "scripts": {
         "dev": "next",
         "build": "next build",
@@ -30,6 +30,7 @@
         "react-icons": "^4.1.0",
         "react-jss": "^10.5.0",
         "react-markdown": "^5.0.3",
+        "react-spinners": "^0.10.4",
         "recompose": "^0.30.0",
         "remark-gfm": "^1.0.0",
         "ts-exhaustive-check": "^1.0.0"

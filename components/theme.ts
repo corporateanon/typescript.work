@@ -4,6 +4,7 @@ export interface Theme {
     colorPaper: string;
     colorShadow: string;
     colorText: string;
+    pageWidth: number;
 }
 export const theme: Theme = {
     colorPaper: '#fff',
@@ -11,4 +12,5 @@ export const theme: Theme = {
     colorSecondary: '#0f19ee',
     colorShadow: '#a3a3a3',
     colorText: '#000',
+    pageWidth: 1000,
 };

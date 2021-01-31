@@ -68,13 +68,13 @@ const useStyles = createUseStyles<Theme>((theme) => ({
 
 interface ProfileViewProps {
     data: GetCV_cvCollection_items_profile;
-    revealSecrets: boolean;
+    grantAccess: boolean;
     onSignIn: () => void;
 }
 
 export const ProfileView: FC<ProfileViewProps> = ({
     data,
-    revealSecrets,
+    grantAccess,
     onSignIn,
 }) => {
     const classes = useStyles();
@@ -83,7 +83,7 @@ export const ProfileView: FC<ProfileViewProps> = ({
 
     return (
         <article className={classes.root}>
-            {revealSecrets ? (
+            {grantAccess ? (
                 <h1>
                     <Person /> {data.name}
                 </h1>
@@ -104,7 +104,7 @@ export const ProfileView: FC<ProfileViewProps> = ({
                 </>
             )}
             <div>
-                {revealSecrets && contacts?.length ? (
+                {grantAccess && contacts?.length ? (
                     <ul className={`${classes.list} ${classes.noMarginBottom}`}>
                         {contacts.map((contactItem, i) => (
                             <li key={i} className={classes.listItem}>

@@ -1,26 +1,18 @@
 import { getDataFromTree } from '@apollo/react-ssr';
-import { signIn, signOut, useSession } from 'next-auth/client';
+import { signIn, useSession } from 'next-auth/client';
 import Head from 'next/head';
+import Link from 'next/link';
 import { FC, useCallback } from 'react';
+import { AuthWidget } from '../components/AuthWidget';
 import { ContentPage } from '../components/ContentPage';
 import { CVView } from '../components/CVView';
+import { ArrowLeft } from '../components/Icons';
+import { NavBar } from '../components/NavBar';
 import { useCV } from '../queries/useCV';
 import { withApolloClient } from '../utils/withApollo';
 
 const Page: FC = () => {
-    const [session, loading] = useSession();
-    const authLine = (
-        <>
-            {session && (
-                <div className="float-right">
-                    {session.user.name ?? session.user.email}{' '}
-                    <button className="button-clear" onClick={() => signOut()}>
-                        Sign out
-                    </button>
-                </div>
-            )}
-        </>
-    );
+    const [session, sessionLoading] = useSession();
 
     const doSignIn = useCallback(() => {
         signIn('auth0');
@@ -38,12 +30,22 @@ const Page: FC = () => {
                 />
             </Head>
 
-            {authLine}
+            <NavBar>
+                <Link href="/">
+                    <a className="button button-clear">
+                        <ArrowLeft /> Home
+                    </a>
+                </Link>
+                <div className="float-right">
+                    <AuthWidget session={session} />
+                </div>
+            </NavBar>
             <ContentPage bordered>
                 <CVView
                     data={data}
                     onSignIn={doSignIn}
-                    revealSecrets={!!session}
+                    grantAccess={!!session}
+                    sessionLoading={sessionLoading}
                 />
             </ContentPage>
         </>
