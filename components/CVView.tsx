@@ -58,13 +58,15 @@ export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
         <div className={classes.root}>
             <aside className={classes.left}>
                 <NoSSR>
-                    {cvItem?.profile && (
-                        <ProfileView
-                            data={cvItem?.profile}
-                            revealSecrets={revealSecrets}
-                            onSignIn={onSignIn}
-                        />
-                    )}
+                    <>
+                        {cvItem?.profile && (
+                            <ProfileView
+                                data={cvItem?.profile}
+                                revealSecrets={revealSecrets}
+                                onSignIn={onSignIn}
+                            />
+                        )}
+                    </>
                 </NoSSR>
             </aside>
             <article className={classes.right}>
