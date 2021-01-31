@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 import { Theme } from './theme';
 
-const WIDTH = 900;
+const WIDTH = 1000;
 const VERTICAL_MARGIN_REM = 2;
 const useStyles = createUseStyles<Theme>((theme) => ({
     root: {
