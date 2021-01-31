@@ -1,9 +1,10 @@
+import { getDataFromTree } from '@apollo/react-ssr';
 import { signIn, signOut, useSession } from 'next-auth/client';
+import Head from 'next/head';
 import { FC, useCallback } from 'react';
 import { ContentPage } from '../components/ContentPage';
 import { CVView } from '../components/CVView';
 import { useCV } from '../queries/useCV';
-import { getDataFromTree } from '@apollo/react-ssr';
 import { withApolloClient } from '../utils/withApollo';
 
 const Page: FC = () => {
@@ -29,6 +30,14 @@ const Page: FC = () => {
 
     return (
         <>
+            <Head>
+                <title>My Résumé</title>
+                <meta
+                    name="description"
+                    content="View CV of a web developer online"
+                />
+            </Head>
+
             {authLine}
             <ContentPage bordered>
                 <CVView

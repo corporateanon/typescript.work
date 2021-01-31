@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import NoSSR from '@mpth/react-no-ssr';
 import React, { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 import { GetCV } from '../queries/__generated__/GetCV';
@@ -7,7 +7,6 @@ import { Period } from './Period';
 import { ProfileView } from './ProfileView';
 import { StringList } from './StringList';
 import { theme, Theme } from './theme';
-import NoSSR from '@mpth/react-no-ssr';
 
 const useStyles = createUseStyles<Theme>(
     {
@@ -57,9 +56,6 @@ export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
 
     return (
         <>
-            <Head>
-                <title>My Résumé</title>
-            </Head>
             <div className={classes.root}>
                 <aside className={classes.left}>
                     <NoSSR>

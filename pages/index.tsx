@@ -27,6 +27,10 @@ const Page: FC = () => {
         <>
             <Head>
                 <title>Node.js, React, TypeScript developer</title>
+                <meta
+                    name="description"
+                    content="View CV of a web developer online"
+                />
             </Head>
             <ContentPage>
                 <div className={classes.row}>
