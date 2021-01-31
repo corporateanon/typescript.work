@@ -4,6 +4,7 @@ import Head from 'next/head';
 import 'normalize.css';
 import { ThemeProvider } from 'react-jss';
 import { theme } from '../components/theme';
+import { Provider as AuthProvider } from 'next-auth/client';
 
 class MyApp extends App {
     componentDidMount() {
@@ -17,17 +18,23 @@ class MyApp extends App {
         const { Component, pageProps } = this.props;
         return (
             <>
-                <Head>
-                    <link rel="icon" type="image/png" href="favicon.png" />
+                <AuthProvider session={pageProps.session}>
+                    <ThemeProvider theme={theme}>
+                        <Head>
+                            <link
+                                rel="icon"
+                                type="image/png"
+                                href="favicon.png"
+                            />
 
-                    <link
-                        rel="stylesheet"
-                        href="//fonts.googleapis.com/css?family=Roboto+Slab"
-                    />
-                </Head>
-                <ThemeProvider theme={theme}>
-                    <Component {...pageProps} />
-                </ThemeProvider>
+                            <link
+                                rel="stylesheet"
+                                href="//fonts.googleapis.com/css?family=Roboto+Slab"
+                            />
+                        </Head>
+                        <Component {...pageProps} />
+                    </ThemeProvider>
+                </AuthProvider>
             </>
         );
     }

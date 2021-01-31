@@ -8,7 +8,7 @@ import { useCV } from '../queries/useCV';
 import { withApolloClient } from '../utils/withApollo';
 
 const Page: FC = () => {
-    const [session, loading] = useSession();
+    const [session, sessionLoading] = useSession();
     const authLine = (
         <>
             {session && (
@@ -44,6 +44,7 @@ const Page: FC = () => {
                     data={data}
                     onSignIn={doSignIn}
                     revealSecrets={!!session}
+                    sessionLoading={sessionLoading}
                 />
             </ContentPage>
         </>
