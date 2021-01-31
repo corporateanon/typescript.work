@@ -7,4 +7,5 @@ export {
     FaGlobeAmericas as Globe,
     FaSkype as Skype,
     FaUser as Person,
+    FaArrowLeft as ArrowLeft,
 } from 'react-icons/fa';

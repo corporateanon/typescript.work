@@ -23,7 +23,6 @@ const useStyles = createUseStyles<Theme>(
             flex: 2,
             maxWidth: 645,
             minWidth: 300,
-            // marginLeft: '2rem',
         },
 
         company: {
