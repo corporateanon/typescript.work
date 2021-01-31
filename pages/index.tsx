@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useSession } from 'next-auth/client';
 import { FC } from 'react';
 import { createUseStyles } from 'react-jss';
@@ -24,6 +25,13 @@ const Page: FC = () => {
 
     return (
         <>
+            <Head>
+                <title>Node.js, React, TypeScript developer</title>
+                <meta
+                    name="description"
+                    content="View CV of a web developer online"
+                />
+            </Head>
             <ContentPage>
                 <div className={classes.row}>
                     <div className={classes.col}>

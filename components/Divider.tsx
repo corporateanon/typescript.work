@@ -4,7 +4,7 @@ import { Theme } from './theme';
 
 const useStyles = createUseStyles<Theme>((theme) => ({
     root: {
-        margin: '6rem auto',
+        margin: '2rem auto',
         width: '30%',
         borderBottom: `1px dotted ${theme.colorShadow}`,
     },
