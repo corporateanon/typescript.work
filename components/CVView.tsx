@@ -46,13 +46,13 @@ const useStyles = createUseStyles<Theme>(
 
 interface CVViewProps {
     data: GetCV;
-    revealSecrets?: boolean;
+    grantAccess?: boolean;
     sessionLoading?: boolean;
     onSignIn: () => void;
 }
 export const CVView: FC<CVViewProps> = ({
     data,
-    revealSecrets,
+    grantAccess,
     onSignIn,
     sessionLoading,
 }) => {
@@ -70,7 +70,7 @@ export const CVView: FC<CVViewProps> = ({
                         cvItem?.profile && (
                             <ProfileView
                                 data={cvItem?.profile}
-                                grantAccess={revealSecrets}
+                                grantAccess={grantAccess}
                                 onSignIn={onSignIn}
                             />
                         )

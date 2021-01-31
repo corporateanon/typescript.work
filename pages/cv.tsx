@@ -43,7 +43,7 @@ const Page: FC = () => {
                 <CVView
                     data={data}
                     onSignIn={doSignIn}
-                    revealSecrets={!!session}
+                    grantAccess={!!session}
                     sessionLoading={sessionLoading}
                 />
             </ContentPage>
