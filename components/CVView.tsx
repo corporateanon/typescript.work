@@ -1,8 +1,8 @@
-import NoSSR from '@mpth/react-no-ssr';
 import React, { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 import { GetCV } from '../queries/__generated__/GetCV';
 import { Divider } from './Divider';
+import { Loading } from './Loading';
 import { Period } from './Period';
 import { ProfileView } from './ProfileView';
 import { StringList } from './StringList';
@@ -23,7 +23,6 @@ const useStyles = createUseStyles<Theme>(
             flex: 2,
             maxWidth: 645,
             minWidth: 300,
-            // marginLeft: '2rem',
         },
 
         company: {
@@ -46,10 +45,16 @@ const useStyles = createUseStyles<Theme>(
 
 interface CVViewProps {
     data: GetCV;
-    revealSecrets: boolean;
+    grantAccess?: boolean;
+    sessionLoading?: boolean;
     onSignIn: () => void;
 }
-export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
+export const CVView: FC<CVViewProps> = ({
+    data,
+    grantAccess,
+    onSignIn,
+    sessionLoading,
+}) => {
     const classes = useStyles();
 
     const cvItem = data?.cvCollection?.items[0];
@@ -58,17 +63,17 @@ export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
         <>
             <div className={classes.root}>
                 <aside className={classes.left}>
-                    <NoSSR>
-                        <>
-                            {cvItem?.profile && (
-                                <ProfileView
-                                    data={cvItem?.profile}
-                                    revealSecrets={revealSecrets}
-                                    onSignIn={onSignIn}
-                                />
-                            )}
-                        </>
-                    </NoSSR>
+                    {sessionLoading ? (
+                        <Loading />
+                    ) : (
+                        cvItem?.profile && (
+                            <ProfileView
+                                data={cvItem?.profile}
+                                grantAccess={grantAccess}
+                                onSignIn={onSignIn}
+                            />
+                        )
+                    )}
                 </aside>
                 <article className={classes.right}>
                     {cvItem?.historyCollection?.items?.map((item, i) => {
