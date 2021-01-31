@@ -18,6 +18,8 @@ class MyApp extends App {
         return (
             <>
                 <Head>
+                    <link rel="icon" type="image/png" href="favicon.png" />
+
                     <link
                         rel="stylesheet"
                         href="//fonts.googleapis.com/css?family=Roboto+Slab"

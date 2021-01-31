@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import React, { FC } from 'react';
 import { createUseStyles } from 'react-jss';
 import { GetCV } from '../queries/__generated__/GetCV';
@@ -55,67 +56,72 @@ export const CVView: FC<CVViewProps> = ({ data, revealSecrets, onSignIn }) => {
     const cvItem = data?.cvCollection?.items[0];
 
     return (
-        <div className={classes.root}>
-            <aside className={classes.left}>
-                <NoSSR>
-                    <>
-                        {cvItem?.profile && (
-                            <ProfileView
-                                data={cvItem?.profile}
-                                revealSecrets={revealSecrets}
-                                onSignIn={onSignIn}
-                            />
-                        )}
-                    </>
-                </NoSSR>
-            </aside>
-            <article className={classes.right}>
-                {cvItem?.historyCollection?.items?.map((item, i) => {
-                    return (
-                        <div key={i}>
-                            {!!i && <Divider />}
-                            <h4>
-                                <span>{item.title}</span>
-                                {item.companyName ? (
-                                    <>
-                                        {' '}
-                                        /{' '}
-                                        <strong className={classes.company}>
-                                            {item.companyUrl ? (
-                                                <a
-                                                    target="_blank"
-                                                    href={item.companyUrl}
-                                                >
-                                                    {item.companyName}
-                                                </a>
-                                            ) : (
-                                                item.companyName
-                                            )}
-                                        </strong>
-                                    </>
-                                ) : null}
-                                <Period start={item.start} end={item.end} />
-                            </h4>
+        <>
+            <Head>
+                <title>My Résumé</title>
+            </Head>
+            <div className={classes.root}>
+                <aside className={classes.left}>
+                    <NoSSR>
+                        <>
+                            {cvItem?.profile && (
+                                <ProfileView
+                                    data={cvItem?.profile}
+                                    revealSecrets={revealSecrets}
+                                    onSignIn={onSignIn}
+                                />
+                            )}
+                        </>
+                    </NoSSR>
+                </aside>
+                <article className={classes.right}>
+                    {cvItem?.historyCollection?.items?.map((item, i) => {
+                        return (
+                            <div key={i}>
+                                {!!i && <Divider />}
+                                <h4>
+                                    <span>{item.title}</span>
+                                    {item.companyName ? (
+                                        <>
+                                            {' '}
+                                            /{' '}
+                                            <strong className={classes.company}>
+                                                {item.companyUrl ? (
+                                                    <a
+                                                        target="_blank"
+                                                        href={item.companyUrl}
+                                                    >
+                                                        {item.companyName}
+                                                    </a>
+                                                ) : (
+                                                    item.companyName
+                                                )}
+                                            </strong>
+                                        </>
+                                    ) : null}
+                                    <Period start={item.start} end={item.end} />
+                                </h4>
 
-                            <StringList
-                                items={item.responsibility}
-                                className={classes.text}
-                                title="Responsibilities"
-                            />
-                            <StringList
-                                items={item.technologies}
-                                className={classes.text}
-                                title="Technologies"
-                            />
-                            <StringList
-                                items={item.achievements}
-                                className={classes.text}
-                                title="Achievements"
-                            />
-                        </div>
-                    );
-                })}
-            </article>
-        </div>
+                                <StringList
+                                    items={item.responsibility}
+                                    className={classes.text}
+                                    title="Responsibilities"
+                                />
+                                <StringList
+                                    items={item.technologies}
+                                    className={classes.text}
+                                    title="Technologies"
+                                />
+                                <StringList
+                                    items={item.achievements}
+                                    className={classes.text}
+                                    title="Achievements"
+                                />
+                            </div>
+                        );
+                    })}
+                </article>
+            </div>
+        </>
     );
 };
